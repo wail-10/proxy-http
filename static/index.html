@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy HTTP</title>
+</head>
+<body>
+    <h1>Proxy HTTP</h1>
+    <button onclick="makeRequest(10)">Faire une requete</button>
+    <script>
+        let startTime, endTime
+        async function makeRequest(num) {
+            startTime = Date.now()
+            const promises = new Array(num)
+                                .fill(1)
+                                .map((_, index) => fetch('http://localhost:3000/users'))
+            const responses = await Promise.all(promises)
+            endTime = Date.now()
+            console.log(startTime, endTime, endTime-startTime, responses)
+        }
+    </script>
+</body>
+</html>
